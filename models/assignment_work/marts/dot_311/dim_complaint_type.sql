@@ -37,4 +37,19 @@ enriched AS (
 
 ),
 
-dim_complaint_
+dim_complaint_type AS (
+
+    SELECT
+        {{ dbt_utils.generate_surrogate_key([
+            'complaint_type', 'descriptor'
+        ]) }} AS complaint_type_key,
+
+        complaint_type,
+        descriptor,
+        complaint_category AS complaint_type_category
+
+    FROM enriched
+
+)
+
+SELECT * FROM dim_complaint_type
