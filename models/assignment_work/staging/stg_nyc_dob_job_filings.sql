@@ -2,7 +2,7 @@
 -- One row per job filing number (job number + filing, e.g. M00512345-I1)
 
 WITH source AS (
-   SELECT * FROM {{ source('raw', 'INSERT_JOB_TABLE_NAME') }}
+   SELECT * FROM {{ source('raw', 'source_nyc_dob_job_apps') }}
 ), -- Easier to refer to the dbt reference to a long name table this way
 
 cleaned AS (
