@@ -63,35 +63,3 @@ null_placeholder AS (
 SELECT location_key, borough, council_district, zip FROM location_dimension
 UNION ALL
 SELECT location_key, borough, council_district, zip FROM null_placeholder
-
-
-
-You’ll need to replace the question marks (“?????”) with something else in each case. 
-
-When you are ready to try running it, in the dbt IDE,
-
-dbt build --select dim_location
-
-If you get an error, for example if you replaced the ???? incorrectly – stay calm and change one thing at a time to debug until it runs successfully.
-
-Then save and commit.
-
-Consider what just happened
-Check out the code above again, specifically this part:
-
-
-location_dimension AS (
-
-    SELECT
-        {{ dbt_utils.generate_surrogate_key([
-            'borough', 'council_district', 'zip'
-        ]) }} AS location_key,
-
-        borough,
-        council_district,
-        zip
-
-    FROM all_locations
-
-),
-
